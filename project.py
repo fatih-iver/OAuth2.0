@@ -138,11 +138,12 @@ def deleteMenuItem(restaurant_id,menu_id):
     else:
         return render_template('deleteMenuItem.html', item = itemToDelete)
 
+# Create anti-forgery state token
 @app.route('/login')
 def showLogin():
     state = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in xrange(32))
     login_session['state'] = state
-    return "The current session state is %s" %login_session['state']
+    return render_template('login.html', STATE=state)
 
 if __name__ == '__main__':
   app.secret_key = 'super_secret_key'
